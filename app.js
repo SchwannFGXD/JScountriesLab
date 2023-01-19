@@ -4,22 +4,22 @@ const getCountryByName = async (countryName)=> {
     const response = await fetch(`https://restcountries.com/v3.1/name/${countryName}`);
     const jsonData = await response.json();
 
-    //console.log(jsonData[0].name.official);
+    for (jsonPoperty of jsonData){
+        const jsonName = jsonPoperty.name.official
+        const jsonPopulation = jsonPoperty.population
 
-    const jsonName = jsonData[0].name.official
-    const jsonPopulation = jsonData[0].population
+        const section = document.getElementById("countriesSection");
+        const countriesList = document.createElement("ul");
+        const countriesName = document.createElement("li");
+        countriesName.textContent = jsonName;
 
-    const section = document.getElementById("countriesSection");
-    const countriesList = document.createElement("ul");
-    const countriesName = document.createElement("li");
-    countriesName.textContent = jsonName;
+        const countriesPopulation = document.createElement("li");
+        countriesPopulation.textContent = jsonPopulation;
 
-    const countriesPopulation = document.createElement("li");
-    countriesPopulation.textContent = jsonPopulation;
-
-    countriesList.appendChild(countriesName);
-    countriesList.appendChild(countriesPopulation);
-    section.appendChild(countriesList);
+        countriesList.appendChild(countriesName);
+        countriesList.appendChild(countriesPopulation);
+        section.appendChild(countriesList);
+    }
 
 }
 
